@@ -277,5 +277,5 @@ class Profiler(object):
             self.init_app(app)
 
     def init_app(self, app):
-        init = functools.partial(self._init_app, app)
-        app.before_first_request(init)
+        with app.app_context():
+            self._init_app(app)
